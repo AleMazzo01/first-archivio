@@ -62,22 +62,33 @@ const upload = multer({ storage });
    UPLOAD
 ====================== */
 app.post("/upload", upload.single("immagine"), async (req, res) => {
-  const { nome, cognome, email, luogo, descrizione } = req.body;
+  try {
+    console.log("FILE UPLOAD:", req.file); // controlla cosa arriva
+    console.log("BODY:", req.body);
 
-  await pool.query(
-    `INSERT INTO archivio (image_url, nome, cognome, email, luogo, descrizione)
-     VALUES ($1, $2, $3, $4, $5, $6)`,
-    [
-      req.file.path, // URL Cloudinary
-      nome,
-      cognome,
-      email,
-      luogo,
-      descrizione
-    ]
-  );
+    if (!req.file) {
+      console.log("Nessun file ricevuto!");
+      return res.status(400).send("Nessun file ricevuto");
+    }
 
-  res.redirect("/");
+    await pool.query(
+      `INSERT INTO archivio (image_url, nome, cognome, email, luogo, descrizione)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [
+        req.file.path, // URL Cloudinary
+        req.body.nome,
+        req.body.cognome,
+        req.body.email,
+        req.body.luogo,
+        req.body.descrizione
+      ]
+    );
+
+    res.redirect("/");
+  } catch (err) {
+    console.error("ERRORE UPLOAD:", err);
+    res.status(500).send("Errore interno server");
+  }
 });
 
 /* ======================
