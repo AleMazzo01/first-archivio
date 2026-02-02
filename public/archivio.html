@@ -55,30 +55,37 @@
 </div>
 
 <!-- JS -->
-<script>
-  // 3️⃣ Slider
-  const slider = document.getElementById("slider");
-  fetch("/archivio")
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "gallery-item";
-        div.innerHTML = `
-          <img src="/uploads/${item.filename}" alt="${item.descrizione}">
+  <script>
+    const slider = document.getElementById("slider");
+
+    fetch("/archivio")
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "gallery-item";
+
+          div.innerHTML = `
+          <img src="${item.image_url}" alt="${item.descrizione}">
           <p><strong>${item.luogo}</strong></p>
           <p>${item.descrizione}</p>
         `;
-        slider.appendChild(div);
+
+          slider.appendChild(div);
+        });
       });
-    });
 
-  const arrowLeft = document.querySelector(".arrow-left");
-  const arrowRight = document.querySelector(".arrow-right");
-  arrowLeft.addEventListener("click", () => slider.scrollBy({ left: -300, behavior: 'smooth' }));
-  arrowRight.addEventListener("click", () => slider.scrollBy({ left: 300, behavior: 'smooth' }));
-</script>
+    const arrowLeft = document.querySelector(".arrow-left");
+    const arrowRight = document.querySelector(".arrow-right");
 
+    arrowLeft.addEventListener("click", () =>
+      slider.scrollBy({ left: -300, behavior: "smooth" })
+    );
+
+    arrowRight.addEventListener("click", () =>
+      slider.scrollBy({ left: 300, behavior: "smooth" })
+    );
+  </script>
 
 
   <footer class="site-footer">

@@ -1,62 +1,98 @@
-const express = require("express");
-const multer = require("multer");
-const sqlite3 = require("sqlite3").verbose();
-const path = require("path");
+import express from "express";
+import multer from "multer";
+import dotenv from "dotenv";
+import pkg from "pg";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+
+dotenv.config();
+
+const { Pool } = pkg;
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Static
+/* ======================
+   STATIC + BODY
+====================== */
 app.use(express.static("public"));
-app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 
-// Database
-const db = new sqlite3.Database("database.db");
+/* ======================
+   DATABASE (PostgreSQL)
+====================== */
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-db.run(`
+// crea tabella se non esiste
+await pool.query(`
   CREATE TABLE IF NOT EXISTS archivio (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    filename TEXT,
+    id SERIAL PRIMARY KEY,
+    image_url TEXT,
     nome TEXT,
     cognome TEXT,
     email TEXT,
     luogo TEXT,
     descrizione TEXT
-  )
+  );
 `);
 
-// Multer
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+/* ======================
+   CLOUDINARY
+====================== */
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "first-archivio",
+    allowed_formats: ["jpg", "jpeg", "png"]
   }
 });
 
 const upload = multer({ storage });
 
-// Upload
-app.post("/upload", upload.single("immagine"), (req, res) => {
+/* ======================
+   UPLOAD
+====================== */
+app.post("/upload", upload.single("immagine"), async (req, res) => {
   const { nome, cognome, email, luogo, descrizione } = req.body;
-  const filename = req.file.filename;
 
-  db.run(
-    `INSERT INTO archivio (filename, nome, cognome, email, luogo, descrizione)
-     VALUES (?, ?, ?, ?, ?, ?)`,
-    [filename, nome, cognome, email, luogo, descrizione],
-    () => res.redirect("/")
+  await pool.query(
+    `INSERT INTO archivio (image_url, nome, cognome, email, luogo, descrizione)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [
+      req.file.path, // URL Cloudinary
+      nome,
+      cognome,
+      email,
+      luogo,
+      descrizione
+    ]
   );
+
+  res.redirect("/");
 });
 
-// API archivio
-app.get("/archivio", (req, res) => {
-  db.all("SELECT * FROM archivio ORDER BY id DESC", (err, rows) => {
-    res.json(rows);
-  });
+/* ======================
+   API ARCHIVIO
+====================== */
+app.get("/archivio", async (req, res) => {
+  const result = await pool.query(
+    "SELECT * FROM archivio ORDER BY id DESC"
+  );
+  res.json(result.rows);
 });
 
-// Start
+/* ======================
+   START
+====================== */
 app.listen(PORT, () => {
-  console.log("Server avviato su http://localhost:" + PORT);
+  console.log("Server avviato su porta " + PORT);
 });
