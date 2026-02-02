@@ -1,0 +1,293 @@
+@font-face {
+  font-family: "GlacialIndifference-Regular";
+  src: url("../fonts/GlacialIndifference-Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* HEADER */
+
+header {
+  background: #0a4dff;
+  padding: 20px 40px 20px 90px;
+  position: relative;
+  z-index: 10;
+
+  /* OMBRA sotto */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.50);
+
+}
+
+.nav {
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;   /* ⬅️ QUESTO */
+
+}
+.nav nav{
+  margin-left: 100px
+}
+
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.logo-main {
+  font-size: 84px;
+  font-weight: bold;
+  color: white;
+  font-family: "GlacialIndifference-Regular";
+
+}
+
+.logo-sub {
+  font-size: 17px;
+  color: white;
+  margin-top: -7px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 40px 10px 40px;
+  font-size: 20px;
+  padding: 10px 20px;
+
+}
+
+#bianco{
+  background-color: white;
+  color: #0a4dff;
+  padding: 10px 40px 10px 40px;
+  margin: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+
+}
+
+/* quando il cursore passa sopra il contenitore .dropdown */
+.dropdown:hover a{
+  background-color: white;   /* sfondo del blocco */
+
+
+  padding: 10px 60px 10px 60px;
+  margin: 0;
+
+
+}
+
+/* e anche il link all’interno */
+.dropdown:hover .dropbtn{
+  color: #0a4dff;           /* testo del link */
+}
+
+
+.dropbtn{
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* menu nascosto */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: -3px;
+  top: 100%;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  overflow: hidden;
+  z-index: 1000;
+  transition: all 0.3s;
+  border-top: #0a4dff solid 4px;
+
+}
+
+
+
+
+/* link interni */
+.dropdown-content a {
+  color: #0a4dff;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  margin: 0px;
+}
+
+.dropdown-content a:hover {
+  background: #f0f0f0;
+}
+
+/* hover apre il menu */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+
+
+
+body {
+  background: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0px;
+}
+
+
+
+
+
+/* SEZIONE STORIA */
+
+.storia-layout {
+  position: relative;
+  display: flex;
+  min-height: 80vh;
+  gap: 60px;
+}
+
+/* Colonna sinistra: titolo gigante */
+.storia-left {
+  width: 40%;
+  font-size: 90px;
+  font-weight: 900;
+  line-height: 0.95;
+  color: #111111;
+  padding: 90px 0px 0px 160px;
+
+}
+
+/* Colonna destra: testo */
+.storia-right {
+  width: 60%;
+  font-size: 22px;
+  line-height: 1.6;
+  color: #111;
+  padding: 30px 90px;
+  margin-right: 100px;
+
+}
+
+
+#titoloSeiQuattro{
+  width: 65%;
+}
+
+#novenove{
+  font-family: "Franklin Gothic Book";
+  font-size: 140px;
+  font-weight: normal;
+}
+
+#quattordici{
+  font-family: "Times New Roman";
+  font-size: 140px;
+  font-weight: normal;
+}
+
+#venti{
+  width: 65%;
+
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 5%;
+  transform: translateY(-50%);
+  z-index: 999;
+  opacity: 0.45;
+  transition: opacity 0.2s, transform 0.2s;
+
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.nav-arrow.left {
+  left: 50px;
+}
+
+.nav-arrow.right {
+  right: 50px;
+}
+
+/* giri la freccia sinistra */
+.nav-arrow.right img {
+  transform: rotate(180deg);
+}
+
+.nav-arrow img {
+  width: 40px;   /* cambia dimensione qui */
+  height: auto;
+}
+
+
+
+
+
+/* FOOTER */
+
+.site-footer {
+  background: #c2c2c2;
+  padding: 40px 90px;
+  display: flex;
+  align-items: center;
+  margin-top: 150px;
+}
+
+/* Le due colonne occupano metà e metà */
+.footer-left,
+.footer-right {
+  width: 50%;
+}
+
+/* Logo a sinistra */
+.footer-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Follow me centrato nella metà destra */
+.footer-right {
+  justify-content: flex-start;
+  padding-left: 100px;
+
+
+}
+
+/* Stile logo */
+.site-footer .logo-main {
+  font-size: 100px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.site-footer .logo-sub {
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: -4px;
+}
+
+/* Testo Follow me */
+.footer-right .follow-text {
+  font-size: 40px;
+  color: #ffffff;
+  font-weight: 500;
+}
+

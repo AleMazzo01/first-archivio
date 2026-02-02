@@ -1,0 +1,285 @@
+@font-face {
+  font-family: "GlacialIndifference-Regular";
+  src: url("../fonts/GlacialIndifference-Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+
+/* HEADER */
+
+header {
+  background: #0a4dff;
+  padding: 20px 40px 20px 90px;
+  position: relative;
+  z-index: 10;
+
+  /* OMBRA sotto */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.50);
+
+}
+
+.nav {
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;   /* ⬅️ QUESTO */
+
+}
+.nav nav{
+  margin-left: 100px
+}
+
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.logo-main {
+  font-size: 84px;
+  font-weight: bold;
+  color: white;
+  font-family: "GlacialIndifference-Regular";
+
+}
+
+.logo-sub {
+  font-size: 17px;
+  color: white;
+  margin-top: -7px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 40px 10px 40px;
+  font-size: 20px;
+  padding: 10px 20px;
+
+}
+
+#bianco{
+  background-color: white;
+  color: #0a4dff;
+  padding: 10px 40px 10px 40px;
+  margin: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+
+}
+
+/* quando il cursore passa sopra il contenitore .dropdown */
+.dropdown:hover a{
+  background-color: white;   /* sfondo del blocco */
+
+
+  padding: 10px 60px 10px 60px;
+  margin: 0;
+
+
+}
+
+/* e anche il link all’interno */
+.dropdown:hover .dropbtn{
+  color: #0a4dff;           /* testo del link */
+}
+
+
+.dropbtn{
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* menu nascosto */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: -3px;
+  top: 100%;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  overflow: hidden;
+  z-index: 1000;
+  transition: all 0.3s;
+  border-top: #0a4dff solid 4px;
+
+}
+
+
+
+
+/* link interni */
+.dropdown-content a {
+  color: #0a4dff;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  margin: 0px;
+}
+
+.dropdown-content a:hover {
+  background: #f0f0f0;
+}
+
+/* hover apre il menu */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+body {
+  background: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0px;
+}
+
+h1 {
+  font-size: 48px;
+  color: #111111;
+  padding-left: 30px;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  overflow: visible;   /* NON hidden */
+  padding: 0px 30px 30px 30px;
+}
+
+.slider {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease;
+  overflow-x: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+
+.gallery-item {
+  min-width: 250px;
+  max-width: 250px;
+  background: #e1e1e1;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.gallery-item img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.gallery-item p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.gallery-item p strong {
+  color: #111111;
+  font-size: large;
+}
+
+/* FRECCE */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow-left {
+  left: 0;
+}
+
+.arrow-right {
+  right: 0;
+}
+
+
+
+
+/* FOOTER */
+
+.site-footer {
+  background: #c2c2c2;
+  padding: 40px 90px;
+  display: flex;
+  align-items: center;
+  margin-top: 150px;
+}
+
+/* Le due colonne occupano metà e metà */
+.footer-left,
+.footer-right {
+  width: 50%;
+}
+
+/* Logo a sinistra */
+.footer-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Follow me centrato nella metà destra */
+.footer-right {
+  justify-content: flex-start;
+  padding-left: 100px;
+
+
+}
+
+/* Stile logo */
+.site-footer .logo-main {
+  font-size: 100px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.site-footer .logo-sub {
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: -4px;
+}
+
+/* Testo Follow me */
+.footer-right .follow-text {
+  font-size: 40px;
+  color: #ffffff;
+  font-weight: 500;
+}

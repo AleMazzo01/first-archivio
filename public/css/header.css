@@ -1,0 +1,118 @@
+/* HEADER */
+
+header {
+  background: #0a4dff;
+  padding: 20px 40px 20px 90px;
+  position: relative;
+  z-index: 10;
+
+  /* OMBRA sotto */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.50);
+
+}
+
+.nav {
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;   /* ⬅️ QUESTO */
+
+}
+.nav nav{
+  margin-left: 100px
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-main {
+  font-size: 84px;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-sub {
+  font-size: 17px;
+  color: white;
+  margin-top: -7px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 40px 10px 40px;
+  font-size: 20px;
+  padding: 10px 20px;
+
+}
+
+#chisiamo{
+  background-color: white;
+  color: #0a4dff;
+  padding: 10px 20px;
+}
+
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+
+}
+
+/* quando il cursore passa sopra il contenitore .dropdown */
+.dropdown:hover a{
+  background-color: white;   /* sfondo del blocco */
+
+}
+
+/* e anche il link all’interno */
+.dropdown:hover .dropbtn{
+  color: #0a4dff;           /* testo del link */
+}
+
+
+.dropbtn{
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* menu nascosto */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: -3px;
+  top: 100%;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  overflow: hidden;
+  z-index: 1000;
+  transition: all 0.3s;
+}
+
+
+
+
+/* link interni */
+.dropdown-content a {
+  color: #0a4dff;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  margin: 0px;
+}
+
+.dropdown-content a:hover {
+  background: #f0f0f0;
+}
+
+/* hover apre il menu */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
